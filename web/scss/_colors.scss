@@ -1,0 +1,22 @@
+@function color($title, $map, $key) {
+  @if map-has-key($map, $key) {
+    @return map-get($map, $key);
+  }
+
+  @warn "Unknown key #{$key} in #{$title}.";
+  @return null;
+}
+
+// primary colors
+$primary: (
+  green: green,
+  blue: blue,
+  turquoise: turquoise,
+  red: red,
+  white: white,
+  gray: gray
+);
+
+@function primary($key) {
+  @return color(primary, $primary, $key);
+}
