@@ -1,17 +1,14 @@
 import { applyMiddleware, createStore, compose } from 'redux';
-import { persistState } from 'redux-devtools';
 import promise from 'redux-promise';
 import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
-import DevTools from '../utils/DevTools';
 import { routerMiddleware } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 
 const router = routerMiddleware(browserHistory);
 const finalCreateStore = compose(
   applyMiddleware(thunk, router, promise),
-  DevTools.instrument(),
-  persistState(getDebugSessionKey())
+  window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore);
 
 function getDebugSessionKey() {
