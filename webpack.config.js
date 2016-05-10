@@ -11,12 +11,14 @@ var sassLoaders = [
 
 module.exports = {
   target: 'web',
-  devtool: 'cheap-eval-source-map',
+  devtool: 'eval',
   cache: true,
   debug: true,
   entry: {
     web:[
-      'webpack-hot-middleware/client',
+      'webpack-dev-server/client?http://localhost:3000',
+      'webpack/hot/only-dev-server',
+      'react-hot-loader/patch',
       './web/index'
     ]
   },
@@ -31,8 +33,7 @@ module.exports = {
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       }
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ],
   module: {
     loaders: [

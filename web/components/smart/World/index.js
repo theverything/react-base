@@ -5,7 +5,7 @@ import { createMessage } from '../../../actions/sample';
 
 import styles from './World.scss';
 
-export default class World extends Component {
+class World extends Component {
   handleChange() {
     this.props.createMessage(this.input.value);
   }

@@ -1,41 +1,16 @@
-var path = require('path');
-var express = require('express');
 var webpack = require('webpack');
-var config = require('./webpack.config.dev');
-var fs = require('fs');
+var WebpackDevServer = require('webpack-dev-server');
+var config = require('./webpack.config');
 
-var app = express();
-var compiler = webpack(config);
-
-app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true,
-  publicPath: config.output.publicPath
-}));
-app.use(require('webpack-hot-middleware')(compiler));
-
-app.get('*', function (req, res) {
-  fs.readFile('./public/index.html', function (err, data) {
-    if (err) {
-      res.writeHeader(500, {'Content-Type': 'text/html'});
-      res.write(err);
-      res.end();
-    } else {
-      res.writeHeader(200, {'Content-Type': 'text/html'});
-      res.write(data);
-      res.end();
-    }
-  });
-});
-
-app.listen(3000, 'localhost', function(err) {
+new WebpackDevServer(webpack(config), {
+  contentBase: './public',
+  publicPath: config.output.publicPath,
+  hot: true,
+  historyApiFallback: true
+}).listen(3000, 'localhost', function (err, result) {
   if (err) {
-    console.log('App Error:', err);
-    return;
+    return console.log(err);
   }
 
-  console.log('Listening at http://localhost:3000');
-});
-
-process.on('uncaughtException', function (err) {
-  console.log('Uncaught Exception:', err.stack);
+  console.log('Listening at http://localhost:3000/');
 });
