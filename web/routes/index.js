@@ -1,9 +1,9 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 
-import App from '../components/smart/App';
-import Hello from '../components/dumb/Hello';
-import World from '../components/smart/World';
+import App from '../containers/App';
+import Hello from '../containers/Hello';
+import World from '../containers/World';
 
 const FourOhFour = () => {
   return (

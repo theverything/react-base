@@ -3,15 +3,14 @@
   "version": "0.2.0",
   "description": "a base project for react",
   "scripts": {
+    "start": "http-server public",
+    "dev": "BABEL_ENV=development NODE_ENV=development npm run build:clean && node devServer.js",
     "build": "npm run build:clean && npm run build:webpack",
     "build:clean": "rimraf ./public/assets/*",
     "build:webpack": "webpack --config webpack.config.prod.js",
-    "start": "http-server public",
-    "dev": "BABEL_ENV=development NODE_ENV=development npm run build:clean && node devServer.js",
-    "gen": "node web/utils/gen",
-    "test": "NODE_ENV=test mocha --require test/.setup.js web/components/dumb/**/test.js web/components/smart/**/test.js test/**/*-test.js",
+    "test": "NODE_ENV=test mocha --require test/.setup.js web/components/**/test.js web/containers/**/test.js test/**/*-test.js",
     "test:lint": "eslint web",
-    "test:cover": "NODE_ENV=test istanbul cover _mocha --require test/.setup.js web/components/dumb/**/test.js web/components/smart/**/test.js test/**/*-test.js",
+    "test:cover": "NODE_ENV=test istanbul cover _mocha --require test/.setup.js web/components/**/test.js web/containers/**/test.js test/**/*-test.js",
     "test:coverResults": "http-server coverage/lcov-report"
   },
   "keywords": [
