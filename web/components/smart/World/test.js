@@ -10,7 +10,7 @@ describe("<World />", function() {
     expect(shallow(<World />).is('div')).to.equal(true);
   });
 
-  it("is has css class World__container", function() {
+  it("has css class World__container", function() {
     expect(shallow(<World />).hasClass('World__container')).to.equal(true);
   });
 
