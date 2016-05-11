@@ -1,7 +1,7 @@
 .test_template: &test_definition
   stage: test
   script:
-    - npm install
+    - npm install --no-progress --no-colors
     - npm run test:lint
     - npm test
 
