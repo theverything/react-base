@@ -1,5 +1,18 @@
+var path = require('path');
+var nodeSass = require('node-sass');
+
+require('ignore-styles').default(['.jpeg', '.jpg', '.gif', '.png', '.svg']);
 require('babel-register')();
-require('ignore-styles').default(['.scss', '.css', '.jpeg', '.jpg', '.gif', '.png', '.svg']);
+require('css-modules-require-hook')({
+  extensions: ['.css', '.scss'],
+  generateScopedName: '[name]__[local]',
+  preprocessCss: function (css, filename) {
+    return nodeSass.renderSync({
+      data: css,
+      includePaths: [path.join(__dirname, '..', '/web/scss')]
+    }).css;
+  }
+});
 
 var jsdom = require('jsdom').jsdom;
 

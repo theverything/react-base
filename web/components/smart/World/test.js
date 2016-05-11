@@ -10,6 +10,10 @@ describe("<World />", function() {
     expect(shallow(<World />).is('div')).to.equal(true);
   });
 
+  it("is has css class World__container", function() {
+    expect(shallow(<World />).hasClass('World__container')).to.equal(true);
+  });
+
   it("handles button click", function () {
     let handleClick = sinon.spy();
 

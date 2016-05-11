@@ -9,6 +9,10 @@ describe("<Hello />", function() {
     expect(shallow(<Hello />).is('div')).to.equal(true);
   });
 
+  it("is has css class Hello__container", function() {
+    expect(shallow(<Hello />).hasClass('Hello__container')).to.equal(true);
+  });
+
   it("has a <Link />", function() {
     expect(shallow(<Hello />).containsMatchingElement(
       <Link to='/world'>Click Me</Link>)
