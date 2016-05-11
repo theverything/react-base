@@ -1,21 +1,57 @@
-.job_template: &job_definition
+.build_template: &build_definition
+  stage: build
   script:
     - npm install
+
+.test_template: &test_definition
+  stage: test
+  script:
     - npm test
+
+.deploy_template: &deploy_definition
+  stage: deploy
+  script:
+    - NODE_ENV=production npm run build
+    - npm prune --production
 
 cache:
   paths:
     - node_modules
 
-node-6.1:
+stages:
+  - build
+  - test
+  - deploy
+
+# #### Build jobs ####
+build:node-6.1:
   image: node:6.1
-  <<: *job_definition
+  <<: *build_definition
 
-node-5.11:
+build:node-5.11:
   image: node:5.11
-  <<: *job_definition
+  <<: *build_definition
 
-# Fails due to weird peer dependency issue
-.node-4.4:
-  image: node:4.4
-  <<: *job_definition
+
+#### Test jobs ####
+test:node-6.1:
+  dependencies:
+    - build:node-6.1
+  <<: *test_definition
+
+test:node-5.11:
+  dependencies:
+    - build:node-5.11
+  <<: *test_definition
+
+
+#### Deploy jobs ####
+deploy:node-6.1:
+  dependencies:
+    - test:node-6.1
+  <<: *deploy_definition
+
+deploy:node-5.11:
+  dependencies:
+    - test:node-5.11
+  <<: *deploy_definition
