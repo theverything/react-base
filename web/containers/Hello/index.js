@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router';
 
 import styles from './Hello.scss';
-import image from '../../../images/BladeRunner.gif';
+import image from '../../images/BladeRunner.gif';
 
 export default class Hello extends Component {
   render() {

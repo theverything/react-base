@@ -1,10 +1,11 @@
 {
-  "presets": ["react", "es2015", "stage-0"],
-  "plugins": ["jsx-control-statements"],
+  "presets": ["es2015-native-modules", "stage-0", "react"],
   "env": {
     "development": {
-      "presets": ["react-hmre"]
+      "plugins": ["react-hot-loader/babel"]
     },
-    "production": {}
+    "test": {
+      "presets": ["es2015", "stage-0", "react"],
+    }
   }
 }
